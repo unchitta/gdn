@@ -91,7 +91,7 @@ class Survey extends Component {
           onComplete={this.handleIslandComplete}
         /> : null }
         {island.length ?
-        <Price
+        <Price className="price-input"
           price={price}
           onChange={this.handlePriceChange}
         />

@@ -21,6 +21,7 @@
 
 body {
     background: #FDED2A;
+    font-family: Helvetica;
 }
 
 .btn {
@@ -34,7 +35,8 @@ body {
   background-color: #FDED2A;
   color: #213409;
   border-style: solid;
-  padding-left: 1em;
+  width: 3em;
+  text-align: center;
 }
 
 @keyframes App-logo-spin {
