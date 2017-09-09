@@ -1,94 +1,119 @@
 import React, { Component } from 'react';
-import * as d3 from 'd3';
-
+import * as V from 'victory';
 
 class Graph extends Component {
+  constructor() {
+    super();
+    this.state = {};
+  }
   componentDidMount() {
 
-    //2017-09-09T06:44:55.000Z
-    const parseDate = d3.timeParse("%Y-%m-%d %H:%M:%S");
+   
 
-    var svg = d3.select("svg"),
-    margin = {top: 20, right: 80, bottom: 30, left: 50},
-    width = svg.attr("width") - margin.left - margin.right,
-    height = svg.attr("height") - margin.top - margin.bottom,
-    g = svg.append("g").attr("transform", "translate(" + margin.left + "," + margin.top + ")");
+    fetch('https://hes.delta9.link/api/location')
+    .then((res) => res.json())
+    .then((json) => this.initMap(json))
+    .catch((err) => {});
+    
 
+     
 
-    var x = d3.scaleTime().range([0, width]),
-    y = d3.scaleLinear().range([height, 0]),
-    z = d3.scaleOrdinal(d3.schemeCategory10);
-
-    var line = d3.line()
-      .curve(d3.curveBasis)
-      .x(function(d) { return x(d.date); })
-      .y(function(d) { return y(d.price); });
-
-
-    d3.json('https://hes.delta9.link/api/location', function(error, datas) {
-      if (error) throw error;
-
-      console.log(datas);
-
-
-      const islandsValues = {};
-      datas.forEach((data) => {
-        if (!islandsValues[data.locname]) {
-          islandsValues[data.locname] = [];
-        }
-        islandsValues[data.locname].push(data);
-      });
-
-      var islandsLine = Object.keys(islandsValues).map((islandName) => ({
-        id: islandName,
-        values: islandsValues[islandName].map((value) => ({
-          date: parseDate(value.time),
-          price: value.price,
-        })),
-      }));
-
-
-
-
-      g.append("g")
-      .attr("class", "axis axis--x")
-      .attr("transform", "translate(0," + height + ")")
-      .call(d3.axisBottom(x));
-
-  g.append("g")
-      .attr("class", "axis axis--y")
-      .call(d3.axisLeft(y))
-    .append("text")
-      .attr("transform", "rotate(-90)")
-      .attr("y", 6)
-      .attr("dy", "0.71em")
-      .attr("fill", "#000")
-      .text("Temperature, ºF");
-
-  var island = g.selectAll(".island")
-    .data(islandsLine)
-    .enter().append("g")
-      .attr("class", "island");
-
-  island.append("path")
-      .attr("class", "line")
-      .attr("d", function(d) { return line(d.values); })
-      .style("stroke", function(d) { return z(d.id); });
-
-  island.append("text")
-      .datum(function(d) { return {id: d.id, value: d.values[d.values.length - 1]}; })
-      .attr("transform", function(d) { return "translate(" + x(d.value.date) + "," + y(d.value.price) + ")"; })
-      .attr("x", 3)
-      .attr("dy", "0.35em")
-      .style("font", "10px sans-serif")
-      .text(function(d) { return d.id; });
       
-    });
   }
+
+  initMap(json) {
+    const islandsValues = {};
+    json.forEach((data) => {
+      if (!islandsValues[data.locname]) {
+        islandsValues[data.locname] = [];
+      }
+      islandsValues[data.locname].push(data);
+    });
+
+    
+
+    var islandsLine = Object.keys(islandsValues).map((islandName) => ({
+      id: islandName,
+      values: islandsValues[islandName].map((value) => ({
+        date: value.time,
+        price: value.price,
+      })),
+    }));
+  }
+
+  handleZoom(domain) {
+    this.setState({selectedDomain: domain});
+  }
+
+  handleBrush(domain) {
+    this.setState({zoomDomain: domain});
+  }
+
   render() {
     return (
       <div className="graph">
-        <svg width="960" height="500"></svg>
+        <div>
+        <VictoryChart width={600} height={470} scale={{x: "time"}}
+          containerComponent={
+            <VictoryZoomContainer
+              dimension="x"
+              zoomDomain={this.state.zoomDomain}
+              onDomainChange={this.handleZoom.bind(this)}
+            />
+          }
+        >
+            <VictoryLine
+              style={{
+                data: {stroke: "tomato"}
+              }}
+              data={[
+                {a: new Date(1982, 1, 1), b: 125},
+                {a: new Date(1987, 1, 1), b: 257},
+                {a: new Date(1993, 1, 1), b: 345},
+                {a: new Date(1997, 1, 1), b: 515},
+                {a: new Date(2001, 1, 1), b: 132},
+                {a: new Date(2005, 1, 1), b: 305},
+                {a: new Date(2011, 1, 1), b: 270},
+                {a: new Date(2015, 1, 1), b: 470}
+              ]}
+              x="a"
+              y="b"
+            />
+
+          </VictoryChart>
+          <VictoryChart
+            padding={{top: 0, left: 50, right: 50, bottom: 30}}
+            width={600} height={100} scale={{x: "time"}}
+            containerComponent={
+              <VictoryBrushContainer
+                dimension="x"
+                selectedDomain={this.state.selectedDomain}
+                onDomainChange={this.handleBrush.bind(this)}
+              />
+            }
+          >
+            <VictoryAxis
+              tickFormat={(x) => new Date(x).getFullYear()}
+            />
+            <VictoryLine
+              style={{
+                data: {stroke: "tomato"}
+              }}
+              data={[
+                {key: new Date(1982, 1, 1), b: 125},
+                {key: new Date(1987, 1, 1), b: 257},
+                {key: new Date(1993, 1, 1), b: 345},
+                {key: new Date(1997, 1, 1), b: 515},
+                {key: new Date(2001, 1, 1), b: 132},
+                {key: new Date(2005, 1, 1), b: 305},
+                {key: new Date(2011, 1, 1), b: 270},
+                {key: new Date(2015, 1, 1), b: 470}
+              ]}
+              x="key"
+              y="b"
+            />
+          </VictoryChart>
+      </div>
       </div>
 
     );
@@ -96,3 +121,4 @@ class Graph extends Component {
 }
 
 export default Graph;
+
