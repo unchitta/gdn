@@ -1,0 +1,54 @@
+{
+	"id": "9edb2ddc-083c-fe66-3617-cddf7eb39b8d",
+	"name": "GDN",
+	"description": "",
+	"order": [
+		"4ed66918-ce00-a0e9-12ca-7b118c7993d9",
+		"a62314c9-1213-fbe2-0c14-ede4934ac73e"
+	],
+	"folders": [],
+	"timestamp": 1504936565223,
+	"owner": "168467",
+	"remoteLink": "",
+	"public": false,
+	"requests": [
+		{
+			"id": "4ed66918-ce00-a0e9-12ca-7b118c7993d9",
+			"headers": "Accept: application/json\nContent-Type: application/json\n",
+			"url": "http://localhost:8080/api/location",
+			"preRequestScript": null,
+			"pathVariables": {},
+			"method": "POST",
+			"data": [],
+			"dataMode": "raw",
+			"tests": null,
+			"currentHelper": "normal",
+			"helperAttributes": {},
+			"time": 1504941173823,
+			"name": "AddLocation",
+			"description": "",
+			"collectionId": "9edb2ddc-083c-fe66-3617-cddf7eb39b8d",
+			"responses": [],
+			"rawModeData": "{\n  \"lineid\": \"andreis\",\n  \"geolocation\": {\n    \"x\": 10.099206,\n    \"y\": 99.832485\n  },\n  \"price\": 30.4,\n  \"currency\": \"thb\",\n  \"locname\": \"Koh Tao\",\n  \"time\": \"2017-09-09 06:44:55\"\n}"
+		},
+		{
+			"id": "a62314c9-1213-fbe2-0c14-ede4934ac73e",
+			"headers": "Accept: application/json\nContent-Type: application/json\n",
+			"url": "http://localhost:8080/api/location",
+			"preRequestScript": null,
+			"pathVariables": {},
+			"method": "GET",
+			"data": [],
+			"dataMode": "raw",
+			"tests": null,
+			"currentHelper": "normal",
+			"helperAttributes": {},
+			"time": 1504941160567,
+			"name": "ListAll locations",
+			"description": "",
+			"collectionId": "9edb2ddc-083c-fe66-3617-cddf7eb39b8d",
+			"responses": [],
+			"rawModeData": "{\n  \"lineid\": \"qwrghewrghr\",\n  \"geolocation\": {\n    \"x\": 13.099206,\n    \"y\": 93.832485\n  },\n  \"price\": 31.4,\n  \"currency\": \"thb\",\n  \"locname\": \"Koh Tao\",\n  \"time\": \"2017-09-09 06:44:55\"\n}"
+		}
+	]
+}
