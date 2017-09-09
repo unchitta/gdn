@@ -24,9 +24,31 @@ class MapWrapper extends Component {
       })
       .then(json => {
         json.forEach(point => {
-          window.L.marker([point.geolocation.x, point.geolocation.y])
+          const markerHtmlStyles = `
+            background-color: ${point.color};
+            width: 1rem;
+            height: 1rem;
+            display: block;
+            left: -1.5rem;
+            top: -1.5rem;
+            position: relative;
+            border-radius: 1rem 1rem 0;
+            transform: rotate(45deg);
+            border: 1px solid #FFFFFF`;
+
+          const icon = window.L.divIcon({
+            className: 's',
+            iconAnchor: [0, 24],
+            labelAnchor: [-6, 0],
+            popupAnchor: [0, -36],
+            html: `<span style="${markerHtmlStyles}" />`
+          });
+
+          window.L.marker([point.geolocation.x, point.geolocation.y], {
+            icon: icon
+          })
             .addTo(this.mymap)
-            .bindPopup('Price: ' + point.price + ' ' + point.currency)
+            .bindPopup(`${point.locname}: ${point.price} ${point.currency}`)
             .openPopup();
         })
       })
