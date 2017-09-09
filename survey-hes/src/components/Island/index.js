@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { Creatable } from 'react-select';
 import { geocodeKey } from '../../config';
 import islandValues from './values';
+import 'react-select/dist/react-select.css';
 
 class Island extends Component {
   constructor(props) {
