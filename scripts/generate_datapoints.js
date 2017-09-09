@@ -3,6 +3,7 @@ require('dotenv').config({
 });
 const mysql = require('mysql');
 const faker = require('faker');
+const moment = require('moment');
 
 const db = mysql.createConnection({
   host: process.env.GDN_DB_HOST,
@@ -28,19 +29,18 @@ db.connect(function (err) {
 
       const no = getRandomInt(2, 5);
       for (let i = 0; i < no; i++) {
-
-        const date = faker.date.recent(200);
+        const date = moment(faker.date.recent(180));
         const v = {
           lineid: faker.random.word(),
           price: faker.finance.amount(25, 34, 2, ''),
           currency: 'thb',
           locname: row.name,
           // last 200 days
-          time: `${date.getFullYear()}-${date.getMonth()+1}-${date.getDay()+1} ${date.getHours()}-${date.getMinutes()}-${date.getSeconds()}`,
+          time: `${date.format("YYYY-MM-DD HH:mm:ss")}`,
         };
 
-        const lat = row['geolocation']['x'] + getRandomArbitrary(0.001, 0.01);
-        const lon = row['geolocation']['y'] + getRandomArbitrary(0.001, 0.01);
+        const lat = row['geolocation']['x'] + getRandomArbitrary(0.00001, 0.0001);
+        const lon = row['geolocation']['y'] + getRandomArbitrary(0.00001, 0.0001);
 
         let point = `POINT(${lat} ${lon})`;
         db.query('INSERT INTO datapoints SET ?, geolocation=GeomFromText(?)', [v, point], (err, results) => {
