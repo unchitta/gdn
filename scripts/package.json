@@ -1,0 +1,10 @@
+{
+  "dependencies": {
+    "@mapbox/sexagesimal": "^1.1.0",
+    "dotenv": "^4.0.0",
+    "faker": "^4.1.0",
+    "jquery": "^3.2.1",
+    "jquery-csv": "^0.8.3",
+    "mysql": "^2.14.1"
+  }
+}
