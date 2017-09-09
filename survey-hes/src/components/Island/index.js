@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { Creatable } from 'react-select';
 import { geocodeKey } from '../../config';
 import islandValues from './values';
+import 'react-select/dist/react-select.css';
 
 class Island extends Component {
   constructor(props) {
@@ -50,13 +51,13 @@ class Island extends Component {
             loading: false,
           });
         });
-
-
     }
   }
 
   handleSelection = (value) => {
-    this.handleSuccess(value.value);
+    if (value.value) {
+      this.handleSuccess(value.value);
+    }
   }
 
   handleSuccess = (islandName) => {
