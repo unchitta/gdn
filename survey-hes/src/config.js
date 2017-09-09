@@ -1,3 +1,1 @@
-export default {
-  geocodeKey: 'AIzaSyCPQyDWFCxLoSs17zSlraTA-T4q73k1M60',
-};
+export const geocodeKey = 'AIzaSyCPQyDWFCxLoSs17zSlraTA-T4q73k1M60';

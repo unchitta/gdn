@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 
 import Geolocation from '../../components/Geolocation';
 import Island from '../../components/Island';
+import Price from '../../components/Price';
 import Wrapper from './Wrapper';
 
 class Survey extends Component {
@@ -28,8 +29,20 @@ class Survey extends Component {
     });
   }
 
+  handleIslandComplete = (name) => {
+    this.setState({ 
+      island: name 
+    });
+  }
+
+  handlePriceChange = (price) => {
+    this.setState({ 
+      price: price 
+    });
+  }
+
   render() {
-    const { no_geolocation, geolocation, island } = this.state;
+    const { no_geolocation, geolocation, island, price } = this.state;
     return (
       <Wrapper>
         {!no_geolocation && !geolocation.coords ?
@@ -42,8 +55,18 @@ class Survey extends Component {
           geolocation={geolocation}
           no_geolocation={no_geolocation}
           island={island}
-          onComplete={this.handleGeolocationComplete}
+          onComplete={this.handleIslandComplete}
         /> : null }
+        {island.length ? 
+        <Price
+          price={price}
+          onChange={this.handlePriceChange}
+        />
+        : null}
+
+        {island.length && price.length ? 
+        <button>Submit</button>
+        : null}
       </Wrapper>
     );
   }
