@@ -18,26 +18,26 @@ class Survey extends Component {
   }
 
   handleGeolocationComplete = (pos) => {
-    this.setState({ 
-      geolocation: pos 
+    this.setState({
+      geolocation: pos
     });
   }
-  
+
   handleGeolocationError = () => {
-    this.setState({ 
-      no_geolocation: true 
+    this.setState({
+      no_geolocation: true
     });
   }
 
   handleIslandComplete = (name) => {
-    this.setState({ 
-      island: name 
+    this.setState({
+      island: name
     });
   }
 
   handlePriceChange = (price) => {
-    this.setState({ 
-      price: price 
+    this.setState({
+      price: price
     });
   }
 
@@ -46,25 +46,25 @@ class Survey extends Component {
     return (
       <Wrapper>
         {!no_geolocation && !geolocation.coords ?
-        <Geolocation 
+        <Geolocation
           onComplete={this.handleGeolocationComplete}
           onError={this.handleGeolocationError}
         /> : null }
-        {(no_geolocation || geolocation.coords) ? 
+        {(no_geolocation || geolocation.coords) ?
         <Island
           geolocation={geolocation}
           no_geolocation={no_geolocation}
           island={island}
           onComplete={this.handleIslandComplete}
         /> : null }
-        {island.length ? 
+        {island.length ?
         <Price
           price={price}
           onChange={this.handlePriceChange}
         />
         : null}
 
-        {island.length && price.length ? 
+        {island.length && price.length ?
         <button>Submit</button>
         : null}
       </Wrapper>
