@@ -3,6 +3,8 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "d3-format": "^1.2.0",
+    "d3-time-format": "^2.0.5",
     "leaflet": "^1.2.0",
     "prop-types": "^15.5.10",
     "react": "^15.6.1",

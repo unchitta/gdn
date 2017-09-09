@@ -12,7 +12,7 @@ class MapWrapper extends Component {
       attribution: '',
       maxZoom: 18,
       id: 'mapbox.streets',
-      accessToken: 'your.mapbox.access.token'
+      accessToken: 'pk.eyJ1IjoiYW5kcmVpYXNodSIsImEiOiJjajdkOTNuZ3cwN245MnFvMnp2cnhjZXB3In0.nYt_dBz4wwYd9X_mP4zzVg'
     }).addTo(this.mymap);
 
     // const endpoint = 'https://hes.delta9.link/api/location';
