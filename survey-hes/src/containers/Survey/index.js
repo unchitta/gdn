@@ -65,7 +65,7 @@ class Survey extends Component {
         : null}
         <br/>
         {island.length && price.length ?
-        <button>Submit</button>
+        <button >Submit</button>
         : null}
       </Wrapper>
     );

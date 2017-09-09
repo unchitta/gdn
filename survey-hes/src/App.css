@@ -23,6 +23,13 @@ body {
     background: #FDED2A;
 }
 
+.btn {
+  margin: .5em;
+  color: black;
+  background-color: #FDED2A;
+  border-color: black;
+}
+
 .price-input {
   background-color: #FDED2A;
   color: #213409;
