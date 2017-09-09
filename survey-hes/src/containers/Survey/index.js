@@ -50,7 +50,7 @@ class Survey extends Component {
     fetch('https://hes.delta9.link/api/location', {
       method: 'POST',
       headers,
-      body: {
+      body: JSON.stringify({
         lineid: this.state.userId,
         geolocation: {
           x: this.state.geolocation.coords.latitude,
@@ -59,8 +59,8 @@ class Survey extends Component {
         price: this.state.price,
         currency: "thb",
         locname: this.state.island,
-        time: `${date.getFullYear()}-${date.getMonth()}-${date.getDay()} ${date.getHours}:${date.getMinutes}:00`
-      }
+        time: `${date.getFullYear()}-${date.getMonth()}-${date.getDay()} ${date.getHours()}:${date.getMinutes()}:00`
+      })
     }).then(() => {
       this.setState({ success: true });
       window.close();
