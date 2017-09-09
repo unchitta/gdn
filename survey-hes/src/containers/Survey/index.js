@@ -98,7 +98,7 @@ class Survey extends Component {
         : null}
         <br/>
         {island.length && price.length ?
-        <button onClick={(event) => {event.preventDefault(); this.handleSubmit();}}>Submit</button>
+        <button className="btn btn-primary" onClick={(event) => {event.preventDefault(); this.handleSubmit();}}>Submit</button>
         : null}
       </Wrapper>
     );
