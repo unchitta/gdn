@@ -20,8 +20,8 @@ class Graph extends Component {
   }
 
   componentDidMount() {
-    // const endpoint = 'https://hes.delta9.link/api/location';
-    const endpoint = 'http://localhost:8080/api/location';
+    const endpoint = 'https://hes.delta9.link/api/location';
+    // const endpoint = 'http://localhost:8080/api/location';
 
     fetch(endpoint)
       .then((res) => res.json())

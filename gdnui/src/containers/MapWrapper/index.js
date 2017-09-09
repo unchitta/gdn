@@ -15,8 +15,8 @@ class MapWrapper extends Component {
       accessToken: 'pk.eyJ1IjoiYW5kcmVpYXNodSIsImEiOiJjajdkOTNuZ3cwN245MnFvMnp2cnhjZXB3In0.nYt_dBz4wwYd9X_mP4zzVg'
     }).addTo(this.mymap);
 
-    // const endpoint = 'https://hes.delta9.link/api/location';
-    const endpoint = 'http://localhost:8080/api/location';
+    const endpoint = 'https://hes.delta9.link/api/location';
+    // const endpoint = 'http://localhost:8080/api/location';
 
     fetch(endpoint)
       .then(res => {
