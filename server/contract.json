@@ -1,0 +1,13 @@
+{
+  "data": [
+    {
+      "locname": "Koh Tao",
+      "loc": {
+        "lat": 100.01,
+        "lon": 98.89
+      },
+      "price": 30.4,
+      "currency": "thb"
+    }
+  ]
+}
