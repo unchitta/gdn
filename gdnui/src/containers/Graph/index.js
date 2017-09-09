@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import * as V from 'victory';
+import { VictoryChart, VictoryLine, VictoryZoomContainer, VictoryBrushContainer, VictoryAxis } from 'victory';
 
 class Graph extends Component {
   constructor() {
