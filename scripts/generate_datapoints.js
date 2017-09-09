@@ -39,8 +39,8 @@ db.connect(function (err) {
           time: `${date.getYear()}-${date.getMonth()}-${date.getDay()} ${date.getHours()}-${date.getMinutes()}-${date.getSeconds()}`,
         };
 
-        const lat = row['geolocation']['x'];
-        const lon = row['geolocation']['y'];
+        const lat = row['geolocation']['x'] + getRandomArbitrary(0.001, 0.01);
+        const lon = row['geolocation']['y'] + getRandomArbitrary(0.001, 0.01);
 
         let point = `POINT(${lat} ${lon})`;
         db.query('INSERT INTO datapoints SET ?, geolocation=GeomFromText(?)', [v, point], (err, results) => {
@@ -52,6 +52,12 @@ db.connect(function (err) {
   });
 });
 
+/**
+ * Returns a random number between min (inclusive) and max (exclusive)
+ */
+function getRandomArbitrary(min, max) {
+  return Math.random() * (max - min) + min;
+}
 
 /**
  * Returns a random integer between min (inclusive) and max (inclusive)

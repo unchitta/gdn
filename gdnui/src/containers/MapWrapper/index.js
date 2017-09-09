@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 
 class MapWrapper extends Component {
 
-  componentShouldUpdate() {
+  shouldComponentUpdate() {
     return false;
   }
 
