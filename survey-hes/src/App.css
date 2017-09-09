@@ -1,6 +1,6 @@
 .App {
   text-align: center;
-  margin-top: 50%;
+  margin-top: 30%;
 }
 
 .App-logo {
@@ -29,6 +29,13 @@ body {
   color: black;
   background-color: #FDED2A;
   border-color: black;
+}
+
+.text-margin {
+  text-align: left;
+  margin-left: 20%;
+  margin-right: 15%;
+  margin-bottom: 10%;
 }
 
 .price-input {
