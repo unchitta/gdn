@@ -84,7 +84,7 @@ class Island extends Component {
           <p>Is this your island?</p>
           <p>{islandValues[possibleResult].english} {islandValues[possibleResult].thai.length ? ` - ${islandValues[possibleResult].thai}` : ''}</p>
           <button onClick={(event) => {event.preventDefault(); this.handleSuccess(islandValues[possibleResult].english);}}>Yes</button>
-          <button>No</button>
+          <button onClick={(event) => {event.preventDefault(); this.setState({possibleResult: '', no_geocode: true});}}>No</button>
         </div>
       );
     }
