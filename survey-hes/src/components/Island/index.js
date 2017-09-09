@@ -50,13 +50,13 @@ class Island extends Component {
             loading: false,
           });
         });
-
-
     }
   }
 
   handleSelection = (value) => {
-    this.handleSuccess(value.value);
+    if (value.value) {
+      this.handleSuccess(value.value);
+    }
   }
 
   handleSuccess = (islandName) => {
