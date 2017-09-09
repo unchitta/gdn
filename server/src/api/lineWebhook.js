@@ -17,7 +17,7 @@ export default ({config, db}) => resource({
   create({body}, res) {
     
     if (body.events && body.events.length) {
-      console.log(util.inspect(body.events[0]));
+      console.log(body.events[0]);
       // if (body.events[0].type === 'follow') {
         const userId = body.events[0].source.userId;
         const client = new Client({ 
