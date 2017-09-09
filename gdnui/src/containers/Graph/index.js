@@ -1,5 +1,13 @@
-import React, { Component } from 'react';
-import { VictoryChart, VictoryLine, VictoryZoomContainer, VictoryBrushContainer, VictoryAxis } from 'victory';
+import React, {Component} from 'react';
+import {
+  VictoryChart,
+  VictoryLine,
+  VictoryZoomContainer,
+  VictoryScatter,
+  VictoryTheme,
+  VictoryBrushContainer,
+  VictoryAxis
+} from 'victory';
 
 class Graph extends Component {
   constructor() {
@@ -10,15 +18,16 @@ class Graph extends Component {
     this.handleZoom = this.handleZoom.bind(this);
     this.handleBrush = this.handleBrush.bind(this);
   }
+
   componentDidMount() {
     fetch('http://localhost:8080/api/location')
-    .then((res) => res.json())
-    .then((json) => this.initMap(json))
-    .catch((err) => {});
+      .then((res) => res.json())
+      .then((json) => this.initMap(json))
+      .catch((err) => {
+      });
   }
 
   initMap(json) {
-    console.log('JSONNN', json);
     const islandsValues = {};
     json.forEach((data) => {
       if (!islandsValues[data.locname]) {
@@ -29,6 +38,7 @@ class Graph extends Component {
 
     const islandsLine = Object.keys(islandsValues).map((islandName) => ({
       id: islandName,
+      color: islandsValues[islandName][0].color,
       values: islandsValues[islandName].map((value) => ({
         date: value.time,
         price: value.price,
@@ -53,42 +63,57 @@ class Graph extends Component {
       return null;
     }
 
+    const dFrom = new Date();
+    dFrom.setMonth(2);
+
     return (
       <div className="graph">
         <div>
-        <VictoryChart width={document.body.clientWidth} height={470} scale={{x: "time"}}
-          containerComponent={
-            <VictoryZoomContainer
-              dimension="x"
-              zoomDomain={this.state.zoomDomain}
-              onDomainChange={this.handleZoom.bind(this)}
+
+          <VictoryChart scale={{ x: 'time' }}
+                        width={document.body.clientWidth} height={470}
+                        theme={VictoryTheme.material}
+                        domain={{x: [dFrom, new Date()], y: [25, 33]}}
+          >
+
+            {islandsLine.map((island) => {
+              const dat = island.values.map((i) => {
+                return {
+                  x: new Date(i.date * 1000),
+                  y: i.price
+                }
+              });
+
+              return (<VictoryScatter key={island.id}
+                                   style={{data: {fill: island.color}}}
+                                   size={3}
+                                   data={dat}
+              />)
+            })}
+            <VictoryScatter
+              style={{data: {fill: "#000000"}}}
+              size={4}
+              data={[
+                {x: 1, y: 2},
+                {x: 2, y: 3},
+                {x: 3, y: 5},
+                {x: 4, y: 4},
+                {x: 5, y: 7}
+              ]}
             />
-          }
-        >
-          {islandsLine.map((island) => {
-                  const dat = island.values.map((i) => {
-                    if (!i.date) {
-                      console.log('Got null date', i);
-                    }
-                    return {
-                      date: new Date(i.date * 1000),
-                      price: i.price
-                    }
-                  });
-
-                  return (<VictoryLine key={island.id}
-                    style={{
-                      data: {stroke: "tomato"}
-                    }}
-                    data={dat}
-                    x="date"
-                    y="price"
-                  />)})
-          }
-
+            <VictoryScatter
+              style={{data: {fill: "#c43f31"}}}
+              size={4}
+              data={[
+                {x: 3, y: 2},
+                {x: 4, y: 3},
+                {x: 5, y: 5},
+                {x: 6, y: 4},
+                {x: 5, y: 7}
+              ]}
+            />
           </VictoryChart>
-
-      </div>
+        </div>
       </div>
 
     );
