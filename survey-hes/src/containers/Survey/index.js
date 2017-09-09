@@ -14,6 +14,7 @@ class Survey extends Component {
       island: '',
       price: 0,
       loading: true,
+      success: false,
     };
   }
 
@@ -41,8 +42,40 @@ class Survey extends Component {
     });
   }
 
+  handleSubmit = () => {
+    const date = new Date();
+    const headers = new Headers();
+    headers.append('Accept', 'application/json');
+    headers.append('Content-Type', 'application/json');
+    fetch('https://hes.delta9.link/api/location', {
+      method: 'POST',
+      headers,
+      body: {
+        lineid: this.state.userId,
+        geolocation: {
+          x: this.state.geolocation.coords.latitude,
+          y: this.state.geolocation.coords.longitude,
+        },
+        price: this.state.price,
+        currency: "thb",
+        locname: this.state.island,
+        time: `${date.getFullYear()}-${date.getMonth()}-${date.getDay()} ${date.getHours}:${date.getMinutes}:00`
+      }
+    }).then(() => {
+      this.setState({ success: true });
+      window.close();
+    });
+  }
+
   render() {
-    const { no_geolocation, geolocation, island, price } = this.state;
+    const { no_geolocation, geolocation, island, price, success } = this.state;
+    if (success) {
+      return (
+        <Wrapper>
+          <p>Thank you for participating!</p>
+        </Wrapper>
+      );
+    }
     return (
       <Wrapper>
         {!no_geolocation && !geolocation.coords ?
@@ -65,7 +98,7 @@ class Survey extends Component {
         : null}
         <br/>
         {island.length && price.length ?
-        <button>Submit</button>
+        <button onClick={(event) => {event.preventDefault(); this.handleSubmit();}}>Submit</button>
         : null}
       </Wrapper>
     );
