@@ -76,7 +76,7 @@ class Graph extends Component {
           <VictoryChart scale={{ x: 'time' }}
                         width={document.body.clientWidth} height={470}
                         theme={VictoryTheme.material}
-                        domain={{x: [dFrom, new Date()], y: [25, 33]}}
+                        domain={{x: [dFrom, new Date()], y: [25, 36]}}
           >
 
             {islandsLine.map((island) => {
