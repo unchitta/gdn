@@ -18,19 +18,9 @@ export default ({config, db}) => resource({
 
   /** GET / - List all entities */
   index({params}, res) {
-    db.query('SELECT * FROM datapoints', function (error, results, fields) {
+    db.query('SELECT id, lineid, geolocation, price, currency, locname, UNIX_TIMESTAMP(time) as time FROM datapoints', function (error, results, fields) {
       if (error) throw error;
-      const out = [];
-      results.forEach((item) => {
-        console.log('item', JSON.stringify(item));
-        const itemjson = JSON.parse(JSON.stringify(item));
-        const d = itemjson.time.split('.')[0];
-        const y = d.replace('T', ' ');
-        // 2017-09-09T06:44:55
-        item['time'] = y;
-        out.push(item);
-      });
-      res.json(out);
+      res.json(results);
     });
   },
 
