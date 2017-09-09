@@ -23,8 +23,11 @@ body {
     background: #FDED2A;
 }
 
-.yellow-background {
+.price-input {
   background-color: #FDED2A;
+  color: #213409;
+  border-style: solid;
+  padding-left: 1em;
 }
 
 @keyframes App-logo-spin {

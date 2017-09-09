@@ -63,7 +63,7 @@ class Survey extends Component {
           onChange={this.handlePriceChange}
         />
         : null}
-
+        <br/>
         {island.length && price.length ?
         <button>Submit</button>
         : null}

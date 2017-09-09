@@ -6,7 +6,7 @@ class Island extends Component {
     const { price, onChange } = this.props;
 
     return (
-      <input className="yellow-background" type="text" value={price} onChange={({ currentTarget: { value } }) => onChange(value)}/>
+      <input className="price-input" type="text" value={price} onChange={({ currentTarget: { value } }) => onChange(value)}/>
     );
   }
 
