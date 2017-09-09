@@ -1,4 +1,6 @@
 import React, { Component } from 'react';
+import TextField from 'material-ui/TextField';
+import LinearProgress from 'material-ui/LinearProgress';
 
 class Island extends Component {
 
@@ -11,7 +13,13 @@ class Island extends Component {
           <p>Last time you bought diesel,</p>
           <p>how much did you pay per litre?</p>
         </div>
-        <input className="price-input" type="text" value={price} onChange={({ currentTarget: { value } }) => onChange(value)}/>
+        <TextField 
+          hintText="00 THB" 
+          style={{
+            width: '70px',
+          }}
+          value={price} 
+          onChange={({ currentTarget: { value } }) => onChange(value)}/>
       </div>
     );
   }
