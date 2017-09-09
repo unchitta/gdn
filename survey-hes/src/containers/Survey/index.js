@@ -4,18 +4,27 @@ import Geolocation from '../../components/Geolocation';
 import Island from '../../components/Island';
 import Price from '../../components/Price';
 import Wrapper from './Wrapper';
+import RaisedButton from 'material-ui/RaisedButton';
+import Paper from 'material-ui/Paper';
+
 
 class Survey extends Component {
   constructor(props) {
     super(props);
     this.state = {
+      userId: '',
       no_geolocation: false,
       geolocation: {},
       island: '',
-      price: 0,
+      price: '',
       loading: true,
       success: false,
     };
+  }
+
+  componentWillMount() {
+    const get = getUrlVars();
+    this.setState({ userId: get['userId'] ? get['userId'] : ''});
   }
 
   handleGeolocationComplete = (pos) => {
@@ -71,7 +80,7 @@ class Survey extends Component {
     const { no_geolocation, geolocation, island, price, success } = this.state;
     if (success) {
       return (
-        <Wrapper>
+        <Wrapper className="complete-survey">
           <p>Thank you for participating!</p>
         </Wrapper>
       );
@@ -97,8 +106,8 @@ class Survey extends Component {
         />
         : null}
         <br/>
-        {island.length && price.length ?
-        <button className="btn btn-primary" onClick={(event) => {event.preventDefault(); this.handleSubmit();}}>Submit</button>
+        {island.length ?
+        <RaisedButton disabled={!price.length} className="btn btn-primary" onClick={(event) => {event.preventDefault(); this.handleSubmit();}}>Submit</RaisedButton>
         : null}
       </Wrapper>
     );
@@ -107,3 +116,15 @@ class Survey extends Component {
 }
 
 export default Survey;
+
+
+function getUrlVars() {
+    var vars = [], hash;
+    var hashes = window.location.href.slice(window.location.href.indexOf('?') + 1).split('&');
+    for(var i = 0; i < hashes.length; i++) {
+      hash = hashes[i].split('=');
+      vars.push(hash[0]);
+      vars[hash[0]] = hash[1];
+    }
+    return vars;
+}
