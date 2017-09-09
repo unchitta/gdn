@@ -29,8 +29,8 @@ class MapWrapper extends Component {
             width: 1rem;
             height: 1rem;
             display: block;
-            left: -1.5rem;
-            top: -1.5rem;
+            left: -0.75rem;
+            top: -0.75rem;
             position: relative;
             border-radius: 1rem 1rem 0;
             transform: rotate(45deg);
