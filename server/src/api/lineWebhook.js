@@ -17,7 +17,8 @@ export default ({config, db}) => resource({
   create({body}, res) {
     
     if (body.events && body.events.length) {
-      if (body.events[0].type === 'follow') {
+      console.log(util.inspect(body.events[0]));
+      // if (body.events[0].type === 'follow') {
         const userId = body.events[0].source.userId;
         const client = new Client({ 
           channelAccessToken: 'aRYpX5jVUw532GwFclyrfEikfymSoPzGhwEG72vE+AwvrjD5cUW73rUXiyhg9GlTTSJEAYHha4Jo17X43reEJ4J7fEo8nrEYwzQ48c3NhqWNcLf6jIH4Y7opHHfit9v3DcNoEQnpuUTGkjHTh1eINgdB04t89/1O/w1cDnyilFU=',
@@ -27,7 +28,7 @@ export default ({config, db}) => resource({
           type: 'text',
           text: 'For the sake of humanity please fill this form https://hes.delta9.link/?user=' + userId
         });
-      }
+      // }
     }
 
 
