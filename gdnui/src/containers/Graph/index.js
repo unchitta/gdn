@@ -5,20 +5,14 @@ class Graph extends Component {
   constructor() {
     super();
     this.state = {};
+    this.handleZoom = this.handleZoom.bind(this);
+    this.handleBrush = this.handleBrush.bind(this);
   }
   componentDidMount() {
-
-   
-
     fetch('https://hes.delta9.link/api/location')
     .then((res) => res.json())
     .then((json) => this.initMap(json))
     .catch((err) => {});
-    
-
-     
-
-      
   }
 
   initMap(json) {
@@ -53,7 +47,7 @@ class Graph extends Component {
     return (
       <div className="graph">
         <div>
-        <VictoryChart width={600} height={470} scale={{x: "time"}}
+        <VictoryChart width={document.body.clientWidth / .6} height={470} scale={{x: "time"}}
           containerComponent={
             <VictoryZoomContainer
               dimension="x"
@@ -83,7 +77,7 @@ class Graph extends Component {
           </VictoryChart>
           <VictoryChart
             padding={{top: 0, left: 50, right: 50, bottom: 30}}
-            width={600} height={100} scale={{x: "time"}}
+            width={600} height={50} scale={{x: "time"}}
             containerComponent={
               <VictoryBrushContainer
                 dimension="x"
