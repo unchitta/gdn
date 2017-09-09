@@ -1,5 +1,6 @@
 .App {
   text-align: center;
+  margin-top: 50%;
 }
 
 .App-logo {
@@ -16,6 +17,26 @@
 
 .App-intro {
   font-size: large;
+}
+
+body {
+    background: #FDED2A;
+    font-family: Helvetica;
+}
+
+.btn {
+  margin: .5em;
+  color: black;
+  background-color: #FDED2A;
+  border-color: black;
+}
+
+.price-input {
+  background-color: #FDED2A;
+  color: #213409;
+  border-style: solid;
+  width: 3em;
+  text-align: center;
 }
 
 @keyframes App-logo-spin {
