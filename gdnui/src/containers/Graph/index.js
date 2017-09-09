@@ -5,6 +5,7 @@ import * as d3 from 'd3';
 class Graph extends Component {
   componentDidMount() {
 
+    //2017-09-09T06:44:55.000Z
     const parseDate = d3.timeParse("%Y-%m-%d %H:%M:%S");
 
     var svg = d3.select("svg"),
@@ -41,7 +42,7 @@ class Graph extends Component {
       var islandsLine = Object.keys(islandsValues).map((islandName) => ({
         id: islandName,
         values: islandsValues[islandName].map((value) => ({
-          date: value.time,
+          date: parseDate(value.time),
           price: value.price,
         })),
       }));

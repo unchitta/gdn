@@ -36,7 +36,7 @@ db.connect(function (err) {
           currency: 'thb',
           locname: row.name,
           // last 200 days
-          time: `${date.getYear()}-${date.getMonth()}-${date.getDay()} ${date.getHours()}-${date.getMinutes()}-${date.getSeconds()}`,
+          time: `${date.getFullYear()}-${date.getMonth()}-${date.getDay()} ${date.getHours()}-${date.getMinutes()}-${date.getSeconds()}`,
         };
 
         const lat = row['geolocation']['x'] + getRandomArbitrary(0.001, 0.01);
