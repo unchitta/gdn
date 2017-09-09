@@ -9,10 +9,12 @@ export default ({config, db}) => resource({
   /** GET / - List all entities */
   index({params}, res) {
     console.log(params);
+    res.send('ok');
   },
 
   /** POST / - Create a new entity */
   create({body}, res) {
     console.log(body);
+    res.send('ok');
   },
 });
