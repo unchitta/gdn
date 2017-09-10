@@ -1,5 +1,6 @@
 import resource from 'resource-router-middleware';
 import location from '../models/location';
+import { Client } from '@line/bot-sdk';
 
 export default ({config, db}) => resource({
 
@@ -49,6 +50,17 @@ export default ({config, db}) => resource({
       if (err) throw err;
       console.log(body, 'BODY');
       res.json("");
+    });
+
+    // Send the messsage to the user
+    const userId = body.lineid;
+    const client = new Client({ 
+      channelAccessToken: 'aRYpX5jVUw532GwFclyrfEikfymSoPzGhwEG72vE+AwvrjD5cUW73rUXiyhg9GlTTSJEAYHha4Jo17X43reEJ4J7fEo8nrEYwzQ48c3NhqWNcLf6jIH4Y7opHHfit9v3DcNoEQnpuUTGkjHTh1eINgdB04t89/1O/w1cDnyilFU=',
+      channelSecret: 'bf4f42623160c813aad4cab0d3ee67b3'
+    });
+    client.pushMessage(userId, {
+      type: 'text',
+      text: 'Thank your for participating, here is some coins to thank you.'
     });
   },
 

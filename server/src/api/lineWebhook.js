@@ -26,7 +26,7 @@ export default ({config, db}) => resource({
         });
         client.pushMessage(userId, {
           type: 'text',
-          text: 'For the sake of humanity please fill this form https://hes.delta9.link/?user=' + userId
+          text: 'For the sake of humanity please fill this form https://survey.delta9.link/?userId=' + userId
         });
       // }
     }
