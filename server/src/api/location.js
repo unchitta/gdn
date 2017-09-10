@@ -18,7 +18,7 @@ export default ({config, db}) => resource({
 
   /** GET / - List all entities */
   index({params}, res) {
-    db.query('SELECT * FROM datapoints', function (error, results, fields) {
+    db.query('SELECT d.id, lineid, d.geolocation, price, currency, locname, UNIX_TIMESTAMP(time) as time, k.color FROM datapoints d LEFT JOIN known_loc k ON d.locname = k.name', function (error, results, fields) {
       if (error) throw error;
       res.json(results);
     });

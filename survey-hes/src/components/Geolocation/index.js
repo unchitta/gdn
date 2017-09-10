@@ -1,4 +1,6 @@
 import React, { Component } from 'react';
+import CircularProgress from 'material-ui/CircularProgress';
+import LinearProgress from 'material-ui/LinearProgress';
 
 class Geolocation extends Component {
   componentWillMount() {
@@ -16,9 +18,10 @@ class Geolocation extends Component {
 
   render() {
     return (
-      <p>
-        Gathering geolocation...
-      </p>
+      <div className="geolocation">
+      <LinearProgress mode="indeterminate" />
+      <p>Sharing your location</p>
+      </div>
     )
   }
 

@@ -2,6 +2,10 @@ import React, { Component } from 'react';
 import { Creatable } from 'react-select';
 import { geocodeKey } from '../../config';
 import islandValues from './values';
+import RaisedButton from 'material-ui/RaisedButton';
+import LinearProgress from 'material-ui/LinearProgress';
+import 'react-select/dist/react-select.css';
+
 
 class Island extends Component {
   constructor(props) {
@@ -50,13 +54,13 @@ class Island extends Component {
             loading: false,
           });
         });
-
-
     }
   }
 
   handleSelection = (value) => {
-    this.handleSuccess(value.value);
+    if (value && value.value) {
+      this.handleSuccess(value.value);
+    }
   }
 
   handleSuccess = (islandName) => {
@@ -68,31 +72,36 @@ class Island extends Component {
     const { no_geocode, loading, possibleResult } = this.state;
     if (island.length) {
       return (
-        <p>{island}</p>
+        <div className="island complete">
+          <p>{island}</p>
+        </div>
       );
     }
     if (loading) {
       return (
+        <div className="geolocation">
+        <LinearProgress mode="indeterminate" />
         <p>
           Gathering Island...
         </p>
+        </div>
       );
     }
     if (possibleResult !== '') {
       return (
-        <div>
+        <div className="island choice">
           <p>Is this your island?</p>
           <p>{islandValues[possibleResult].english} {islandValues[possibleResult].thai.length ? ` - ${islandValues[possibleResult].thai}` : ''}</p>
-          <button
-            className="btn btn-primary"
+          <RaisedButton
+            className="btn btn-primary" primary={true}
             onClick={(event) => {event.preventDefault(); this.handleSuccess(islandValues[possibleResult].english);}}>
             Yes
-          </button>
-          <button
-            className="btn btn-primary"
+          </RaisedButton>
+          <RaisedButton
+            className="btn btn-secondary"
             onClick={(event) => {event.preventDefault(); this.setState({possibleResult: '', no_geocode: true});}}>
             No
-          </button>
+          </RaisedButton>
         </div>
       );
     }
@@ -101,7 +110,7 @@ class Island extends Component {
          ({ value: value.english, label: `${value.english} ${value.thai}` })
       );
       return (
-        <div>
+        <div className="island input">
           <p>Enter the name of your island</p>
           <Creatable
             name="form-select-island"
