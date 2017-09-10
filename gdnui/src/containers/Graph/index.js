@@ -59,7 +59,6 @@ class Graph extends Component {
   }
 
   render() {
-    console.log(this.state.islandsLine);
     const islandsLine = this.state.islandsLine;
     const lines = [];
     if (!this.state.islandsLine.length) {
@@ -79,7 +78,12 @@ class Graph extends Component {
                         domain={{x: [dFrom, new Date()], y: [25, 36]}}
           >
 
-            {islandsLine.map((island) => {
+            {islandsLine.filter((item) => {
+              if (this.props.curIslandId !== null && item.id != this.props.curIslandId) {
+                return false;
+              }
+              return true;
+            }).map((island) => {
               const dat = island.values.map((i) => {
                 return {
                   x: new Date(i.date * 1000),
@@ -93,28 +97,6 @@ class Graph extends Component {
                                    data={dat}
               />)
             })}
-            <VictoryScatter
-              style={{data: {fill: "#000000"}}}
-              size={4}
-              data={[
-                {x: 1, y: 2},
-                {x: 2, y: 3},
-                {x: 3, y: 5},
-                {x: 4, y: 4},
-                {x: 5, y: 7}
-              ]}
-            />
-            <VictoryScatter
-              style={{data: {fill: "#c43f31"}}}
-              size={4}
-              data={[
-                {x: 3, y: 2},
-                {x: 4, y: 3},
-                {x: 5, y: 5},
-                {x: 6, y: 4},
-                {x: 5, y: 7}
-              ]}
-            />
           </VictoryChart>
         </div>
       </div>

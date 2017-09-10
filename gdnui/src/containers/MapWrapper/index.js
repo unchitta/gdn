@@ -44,12 +44,20 @@ class MapWrapper extends Component {
             html: `<span style="${markerHtmlStyles}" />`
           });
 
-          window.L.marker([point.geolocation.x, point.geolocation.y], {
+          const Marker = window.L.marker([point.geolocation.x, point.geolocation.y], {
             icon: icon
           })
             .addTo(this.mymap)
-            .bindPopup(`${point.locname}: ${point.price} ${point.currency}`)
-            .openPopup();
+            .bindPopup(`${point.locname}: ${point.price} ${point.currency}`);
+          const self = this;
+          Marker.on('mouseover', function(e) {
+              this.openPopup();
+              self.props.onChangeIsland(point.locname);
+            })
+            .on('mouseout', function(e) {
+              this.closePopup();
+              self.props.onChangeIsland(null);
+            });
         })
       })
       .catch(err => {
