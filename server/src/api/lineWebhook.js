@@ -26,7 +26,7 @@ export default ({config, db}) => resource({
         });
         client.pushMessage(userId, {
           type: 'text',
-          text: 'For the sake of humanity please fill this form https://survey.delta9.link/?userId=' + userId
+          text: "Please help us. Help you by answering our 1-minute survey. Your answer will help improve our country and our islands. You'll get 2 line points immediately in return for your precious time. https://survey.delta9.link/?userId=" + userId
         });
       // }
     }

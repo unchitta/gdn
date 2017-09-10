@@ -50,7 +50,7 @@ export default ({config, db}) => resource({
     });
     client.pushMessage(userId, {
       type: 'text',
-      text: 'Thank your for participating, here is some coins to thank you.'
+      text: 'Thank you for answer. Here is your reward. Importantly, the more you submit your data, the more you receive double line points. Hurry up!! Our campaign will end in this month.'
     });
   },
 
