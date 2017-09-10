@@ -26,13 +26,20 @@ db.connect(function (err) {
       if (row.geolocation === null) {
         return;
       }
-
-      const no = getRandomInt(2, 5);
+      const no = getRandomInt(5, 10);
       for (let i = 0; i < no; i++) {
-        const date = moment(faker.date.recent(180));
+        let date = null;
+        if (i === 0) {
+          date = moment(`2017-01-${getRandomInt(10, 30)} 01:01:00`);;
+        } else if (i === no) {
+          date = moment(faker.date.recent(1));;
+        }
+        else {
+          date = moment(faker.date.recent(220));
+        }
         const v = {
           lineid: faker.random.word(),
-          price: faker.finance.amount(25, 34, 2, ''),
+          price: faker.finance.amount(30, 50, 2, ''),
           currency: 'thb',
           locname: row.name,
           // last 200 days

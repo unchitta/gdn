@@ -17,8 +17,6 @@ class Graph extends Component {
     this.state = {
       islandsLine: []
     };
-    this.handleZoom = this.handleZoom.bind(this);
-    this.handleBrush = this.handleBrush.bind(this);
   }
 
   componentDidMount() {
@@ -52,14 +50,6 @@ class Graph extends Component {
     this.setState({islandsLine});
   }
 
-  handleZoom(domain) {
-    this.setState({selectedDomain: domain});
-  }
-
-  handleBrush(domain) {
-    this.setState({zoomDomain: domain});
-  }
-
   render() {
     const islandsLine = this.state.islandsLine;
     const lines = [];
@@ -68,7 +58,8 @@ class Graph extends Component {
     }
 
     const dFrom = new Date();
-    dFrom.setMonth(2);
+    dFrom.setMonth(0);
+
 
     return (
       <div className="graph">
@@ -77,7 +68,7 @@ class Graph extends Component {
           <VictoryChart scale={{ x: 'time' }}
                         width={document.body.clientWidth} height={470}
                         theme={VictoryTheme.material}
-                        domain={{x: [dFrom, new Date()], y: [25, 36]}}
+                        domain={{x: [dFrom, new Date()], y: [30, 52]}}
           >
             <VictoryLabel text={"THB / L diesel"} x={10} y={230} angle={"270"}/>
             {islandsLine.filter((item) => {
