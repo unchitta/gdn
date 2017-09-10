@@ -35,7 +35,7 @@ db.connect(function (err) {
           date = moment(faker.date.recent(1));;
         }
         else {
-          date = moment(faker.date.recent(180));
+          date = moment(faker.date.recent(220));
         }
         const v = {
           lineid: faker.random.word(),
