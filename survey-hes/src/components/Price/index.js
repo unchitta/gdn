@@ -14,6 +14,7 @@ class Island extends Component {
           <p>how much did you pay per litre?</p>
         </div>
         <TextField 
+          type="number"
           hintText="00 THB" 
           style={{
             width: '70px',
