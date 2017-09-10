@@ -41,7 +41,7 @@ db.connect(function (err) {
         }
         const v = {
           lineid: faker.random.word(),
-          price: faker.finance.amount(25, 34, 2, ''),
+          price: faker.finance.amount(30, 50, 2, ''),
           currency: 'thb',
           locname: row.name,
           // last 200 days
