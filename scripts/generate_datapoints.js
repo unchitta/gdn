@@ -22,14 +22,23 @@ db.connect(function (err) {
   db.query('SELECT * FROM known_loc', (err, results) => {
     if (err) throw err;
 
+    const firstDate = moment(faker.date.past(1));
+    const endDate = moment(faker.date.recent(1));
     results.forEach((row) => {
       if (row.geolocation === null) {
         return;
       }
-
-      const no = getRandomInt(2, 5);
+      const no = getRandomInt(5, 10);
       for (let i = 0; i < no; i++) {
-        const date = moment(faker.date.recent(180));
+        let date = null;
+        if (i === 0) {
+          date = firstDate;
+        } else if (i === no) {
+          date = endDate;
+        }
+        else {
+          date = moment(faker.date.recent(360));
+        }
         const v = {
           lineid: faker.random.word(),
           price: faker.finance.amount(25, 34, 2, ''),
