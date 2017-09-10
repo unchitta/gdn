@@ -15,8 +15,8 @@ class MapWrapper extends Component {
       accessToken: 'pk.eyJ1IjoiYW5kcmVpYXNodSIsImEiOiJjajdkOTNuZ3cwN245MnFvMnp2cnhjZXB3In0.nYt_dBz4wwYd9X_mP4zzVg'
     }).addTo(this.mymap);
 
-    // const endpoint = 'https://hes.delta9.link/api/location';
-    const endpoint = 'http://localhost:8080/api/location';
+    const endpoint = 'https://hes.delta9.link/api/location';
+    // const endpoint = 'http://localhost:8080/api/location';
 
     fetch(endpoint)
       .then(res => {
@@ -24,9 +24,31 @@ class MapWrapper extends Component {
       })
       .then(json => {
         json.forEach(point => {
-          window.L.marker([point.geolocation.x, point.geolocation.y])
+          const markerHtmlStyles = `
+            background-color: ${point.color};
+            width: 1rem;
+            height: 1rem;
+            display: block;
+            left: -0.75rem;
+            top: -0.75rem;
+            position: relative;
+            border-radius: 1rem 1rem 0;
+            transform: rotate(45deg);
+            border: 1px solid #FFFFFF`;
+
+          const icon = window.L.divIcon({
+            className: 's',
+            iconAnchor: [0, 24],
+            labelAnchor: [-6, 0],
+            popupAnchor: [0, -36],
+            html: `<span style="${markerHtmlStyles}" />`
+          });
+
+          window.L.marker([point.geolocation.x, point.geolocation.y], {
+            icon: icon
+          })
             .addTo(this.mymap)
-            .bindPopup('Price: ' + point.price + ' ' + point.currency)
+            .bindPopup(`${point.locname}: ${point.price} ${point.currency}`)
             .openPopup();
         })
       })

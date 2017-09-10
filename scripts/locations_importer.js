@@ -1,4 +1,5 @@
 const sexagesimal = require('@mapbox/sexagesimal');
+const randomcolor = require('randomcolor');
 require('dotenv').config({
   path: '../server/.env'
 });
@@ -41,6 +42,7 @@ db.connect(function (err) {
             continue;
           }
 
+          const rcolor = randomcolor();
           const latlon = data[i][2].trim().split(" ");
           const lat = sexagesimal(latlon[0]);
           const lon = sexagesimal(latlon[1]);
@@ -50,7 +52,8 @@ db.connect(function (err) {
           }
           const v = {
             name: data[i][0].trim(),
-            thainame: data[i][1].trim()
+            thainame: data[i][1].trim(),
+            color: rcolor
           };
 
           let point = `POINT(${lat} ${lon})`;
