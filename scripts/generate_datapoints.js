@@ -22,7 +22,7 @@ db.connect(function (err) {
   db.query('SELECT * FROM known_loc', (err, results) => {
     if (err) throw err;
 
-    const firstDate = moment(faker.date.past(1));
+    const firstDate = moment('2017-01-01 01:01:00');
     const endDate = moment(faker.date.recent(1));
     results.forEach((row) => {
       if (row.geolocation === null) {
