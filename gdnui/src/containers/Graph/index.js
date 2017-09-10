@@ -4,8 +4,10 @@ import {
   VictoryLine,
   VictoryZoomContainer,
   VictoryScatter,
+  VictoryLabel,
   VictoryTheme,
   VictoryBrushContainer,
+  VictoryArea,
   VictoryAxis
 } from 'victory';
 
@@ -77,7 +79,7 @@ class Graph extends Component {
                         theme={VictoryTheme.material}
                         domain={{x: [dFrom, new Date()], y: [25, 36]}}
           >
-
+            <VictoryLabel text={"THB / L diesel"} x={10} y={230} angle={"270"}/>
             {islandsLine.filter((item) => {
               if (this.props.curIslandId !== null && item.id != this.props.curIslandId) {
                 return false;
@@ -94,6 +96,10 @@ class Graph extends Component {
               if (this.props.curIslandId !== null) {
                 return (<VictoryLine  key={island.id}
                                       data={dat}
+                                      style={{
+                                        data: { stroke: island.color },
+                                        parent: { border: "1px solid #ccc"}
+                                      }}
                 />);
               }
 
