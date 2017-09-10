@@ -91,6 +91,12 @@ class Graph extends Component {
                 }
               });
 
+              if (this.props.curIslandId !== null) {
+                return (<VictoryLine  key={island.id}
+                                      data={dat}
+                />);
+              }
+
               return (<VictoryScatter key={island.id}
                                    style={{data: {fill: island.color}}}
                                    size={3}
