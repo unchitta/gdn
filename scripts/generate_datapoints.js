@@ -22,8 +22,6 @@ db.connect(function (err) {
   db.query('SELECT * FROM known_loc', (err, results) => {
     if (err) throw err;
 
-    const firstDate = moment('2017-01-01 01:01:00');
-    const endDate = moment(faker.date.recent(1));
     results.forEach((row) => {
       if (row.geolocation === null) {
         return;
@@ -32,9 +30,9 @@ db.connect(function (err) {
       for (let i = 0; i < no; i++) {
         let date = null;
         if (i === 0) {
-          date = firstDate;
+          date = moment(`2017-01-${getRandomInt(10, 30)} 01:01:00`);;
         } else if (i === no) {
-          date = endDate;
+          date = moment(faker.date.recent(1));;
         }
         else {
           date = moment(faker.date.recent(180));

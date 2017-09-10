@@ -56,9 +56,8 @@ class Graph extends Component {
     }
 
     const dFrom = new Date();
-    dFrom.setMonth(10);
+    dFrom.setMonth(0);
 
-    dFrom.setFullYear(2016);
 
     return (
       <div className="graph">
